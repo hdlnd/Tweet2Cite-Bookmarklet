@@ -136,23 +136,33 @@ window.tweet2cite = (function () {
             
             tweet.apaCitation = (authorUserName + '. (' + apaDate + '). ' + contentBody + ' [Twitter Post]. Retrieved from ' + url);
 
-            //fix problem with parsedShit edge case(s) where @ links and # links get blown out
-            //build more name format options, think about how to display
 
-            var tweetModalString = ("<style>@import url(https://fonts.googleapis.com/css?family=Droid+Serif);#display-citation-container{font-family: font-family: 'Droid Serif','Georgia',serif;}#display-citation-container h1{font-family: 'Lucida Grande','Lucida Sans','Tahoma',sans-serif;font-size: 3em;text-align: center;color: #444444;margin-bottom: 15px;}#display-citation-container h2{font-family: 'Lucida Grande','Lucida Sans','Tahoma',sans-serif;font-size: 1.6em;color: #444444;margin-bottom: 15px;margin-top: 15px;clear: both;}#display-citation-container span{width: 80%;float: left;margin-bottom: 15px;margin-left: 20pxcolor: #222222;}#display-citation-container button.copy{cursor: pointer;text-decoration:none;padding: 10px 15px 10px 15px;color: rgb(255, 255, 255);border-radius:8px 8px 8px 8px;-moz-border-radius:8px 8px 8px 8px;-webkit-border-radius:8px 8px 8px 8px;background-color: rgb(158, 158, 158);font: 16px helvetica;margin-left: 20px;}#display-citation-container button:hover{cursor: pointer;text-decoration:none;padding: 10px 15px 10px 15px;color:rgb(255, 255, 255);border-radius:8px 8px 8px 8px;-moz-border-radius:8px 8px 8px 8px;-webkit-border-radius:8px 8px 8px 8px;background-color: rgb(191, 191, 191);font: 16px helvetica;}#display-citation-container button:active{cursor: pointer;text-decoration:none;padding: 10px 15px 10px 15px;color:rgb(255, 255, 255);border-radius:8px 8px 8px 8px;-moz-border-radius:8px 8px 8px 8px;-webkit-border-radius:8px 8px 8px 8px;background-color: rgb(191, 191, 191);font: 16px helvetica;}.modalCitationContent{display: none;width: 60%;background: #ebf4f7;padding: 15px 30px;-webkit-border-radius: 8px;-moz-border-radius: 8px;-o-border-radius: 8px;-ms-border-radius: 8px;border-radius: 8px;-webkit-box-shadow: 0 0 10px #000;-moz-box-shadow: 0 0 10px #000;-o-box-shadow: 0 0 10px #000;-ms-box-shadow: 0 0 10px #000;box-shadow: 0 0 10px #000;}.modalCitationContent a.close-modal{position: absolute;top: -12.5px;right: -12.5px;display: block;width: 30px;height: 30px;text-indent: -9999px;background: url(close.png) no-repeat 0 0;}</style><h1 id='tweet2cite-title'>Tweet2Cite</h1><h2>MLA:</h2><span id='mla-citation-content' class='tweet-citation-content'>"+tweet.mlaCitation+"</span><button id='copyMlaButton'class='copy'>copy</button><h2>APA:</h2><span id='apa-citation-content' class='tweet-citation-content'>"+tweet.apaCitation+"</span><button id='copyApaButton' class='copy'>copy</button>");
+            var tweetModalString = ("<style>@import url(https://fonts.googleapis.com/css?family=Droid+Serif);\
+                #display-citation-container{font-family: font-family: 'Droid Serif','Georgia',serif;}#display-citation-container\
+                h1{font-family: 'Lucida Grande','Lucida Sans','Tahoma',sans-serif;font-size: 3em;text-align: center;color: #444444;\
+                margin-bottom: 15px;}#display-citation-container h2{font-family: 'Lucida Grande','Lucida Sans','Tahoma',sans-serif;\
+                font-size: 1.6em;color: #444444;margin-bottom: 15px;margin-top: 15px;clear: both;}#display-citation-container span{width: 80%;\
+                float: left;margin-bottom: 15px;margin-left: 20pxcolor: #222222;}#display-citation-container button.copy{cursor: pointer;\
+                text-decoration:none;padding: 10px 15px 10px 15px;color: rgb(255, 255, 255);border-radius:8px 8px 8px 8px;\
+                -moz-border-radius:8px 8px 8px 8px;-webkit-border-radius:8px 8px 8px 8px;background-color: rgb(158, 158, 158);\
+                font: 16px helvetica;margin-left: 20px;}#display-citation-container button:hover{cursor: pointer;\
+                text-decoration:none;padding: 10px 15px 10px 15px;color:rgb(255, 255, 255);border-radius:8px 8px 8px 8px;\
+                -moz-border-radius:8px 8px 8px 8px;-webkit-border-radius:8px 8px 8px 8px;background-color: rgb(191, 191, 191);\
+                font: 16px helvetica;}#display-citation-container button:active{cursor: pointer;text-decoration:none;\
+                padding: 10px 15px 10px 15px;color:rgb(255, 255, 255);border-radius:8px 8px 8px 8px;-moz-border-radius:8px 8px 8px 8px;\
+                -webkit-border-radius:8px 8px 8px 8px;background-color: rgb(191, 191, 191);font: 16px helvetica;}\
+                .modalCitationContent{display: none;width: 60%;background: #ebf4f7;padding: 15px 30px;-webkit-border-radius: 8px;\
+                -moz-border-radius: 8px;-o-border-radius: 8px;-ms-border-radius: 8px;border-radius: 8px;\
+                -webkit-box-shadow: 0 0 10px #000;-moz-box-shadow: 0 0 10px #000;-o-box-shadow: 0 0 10px #000;\
+                -ms-box-shadow: 0 0 10px #000;box-shadow: 0 0 10px #000;}.modalCitationContent a.close-modal{position: absolute;\
+                top: -12.5px;right: -12.5px;display: block;width: 30px;height: 30px;text-indent: -9999px;\
+                background: url(close.png) no-repeat 0 0;}</style><h1 id='tweet2cite-title'>Tweet2Cite</h1><h2>MLA:</h2>\
+                <span id='mla-citation-content' class='tweet-citation-content'>"+tweet.mlaCitation+"</span><h2>APA:</h2>\
+                <span id='apa-citation-content' class='tweet-citation-content'>"+tweet.apaCitation+"</span>");
 
             $("div#display-citation-container").append(tweetModalString);
 
             $("div#display-citation-container").modal()
-
-            //$('button#copyMlaButton').jclip({
-            //  path:'http://tweet2cite.dev/jClip10.swf',
-            //  copy:function(){
-            //  	return $(tweet.mlaCitation);
-            //	}
-            //)};
-
-
 
         })();
     }
